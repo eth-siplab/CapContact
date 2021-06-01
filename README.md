@@ -1,15 +1,52 @@
-# Research Repository for CapContact
+# Research repository for CapContact
 
-This is the research repository for the ACM CHI 2021 Paper: "CapContact: Super-resolution Contact Areas from Capacitive Touchscreens." This repository contains the dataset we collected on capacitive imprints and high-resolution ground-truth contact masks based on recordings using frustrated total interal reflection.
+[Paul Streli](https://www.paulstreli.com) and [Christian Holz](https://www.christianholz.net)<br/>
+[Sensing, Interaction & Perception Lab](https://siplab.org) <br/>
+Department of Computer Science, ETH Zürich
+
+This is the research repository for the ACM CHI 2021 Paper: "CapContact: Super-resolution Contact Areas from Capacitive Touchscreens." This repository contains the dataset we collected on capacitive imprints and actual contact masks in high-resolution based on recordings using frustrated total interal reflection.
+
+[![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 
 
-# Reference
+## Dataset
+
+The records stem from a data collection with 10 participants and 3 sessions each. The records are provided in png format (8-bit encoding) as well as in a numpy array (16-bit capacitive images from the mutual-capacitance digitizer, 8-bit contact masks).
+
+The **capacitive images** result from a Microchip ATMXT2954T2 digitizer with 16-bit precision with a resolution of 72&nbsp;px × 41&nbsp;px and the ITO diamond gridline sensor covered an area of 345&nbsp;mm × 195&nbsp;mm (15.6″ diagonal).
+
+The actual **contact masks** are derived from a frustrated total internal reflection (FTIR) setup using a camera. Contact images have a resolution of 576&nbsp;px × 328&nbsp;px. This amounts to a super-resolution factor of 8×.
+
+| capacitive image    | contact mask (FTIR)   |
+| :------------------ | :-------------------- |
+| resolution: 72 x 41 | resolution: 576 x 328 |
+| ![capacitive imprint of a hand](CapContact-dataset/P01/1/png/0133_cap.png) | ![high-resolution contact mask of the same hand](CapContact-dataset/P01/1/png/0133_contact.png) |
+
+The `numpy` arrays can be loaded using python as follows:
+
+```python
+sample  = np.load('CapContact-dataset/P01/1/npz/0133.npz')
+cap     = sample['cap']
+contact = sample['ftir']
+```
+
+## Code
+
+Our trained models as well as the code to train and test models will be uploaded soon.
+
+
+## Publication reference
 
 Paul Streli and Christian Holz. 2021. CapContact: Super-resolution Contact Areas from Capacitive Touchscreens. Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems. Association for Computing Machinery, New York, NY, USA, Article 289, 1–14. DOI:https://doi.org/10.1145/3411764.3445621
 
-Direct links: [paper PDF](https://siplab.org/papers/chi2021-capcontact.pdf) · [video](https://www.youtube.com/watch?v=oCtj-eQpIQI) · [presentation video](https://www.youtube.com/watch?v=qtf6u4pJoyA) · [project page](https://siplab.org/projects/CapContact)
+### Direct links
 
-BibTeX Reference:
+* [CapContact paper PDF](https://siplab.org/papers/chi2021-capcontact.pdf)
+* [CapContact video](https://www.youtube.com/watch?v=oCtj-eQpIQI)
+* [CapContact presentation video](https://www.youtube.com/watch?v=qtf6u4pJoyA)
+* [CapContact project page](https://siplab.org/projects/CapContact)
+
+### BibTeX reference
 
 ```
 @inproceedings{10.1145/3411764.3445621,
@@ -26,14 +63,14 @@ BibTeX Reference:
 }
 ```
 
-# Abstract
+## Abstract
 
 Touch input is dominantly detected using mutual-capacitance sensing, which measures the proximity of close-by objects that change the electric field between the sensor lines. The exponential drop-off in intensities with growing distance enables software to detect touch events, but does not reveal true contact areas. In this paper, we introduce CapContact, a novel method to precisely infer the contact area between the user’s finger and the surface from a single capacitive image. At 8x super-resolution, our convolutional neural network generates refined touch masks from 16-bit capacitive images as input, which can even discriminate adjacent touches that are not distinguishable with existing methods. We trained and evaluated our method using supervised learning on data from 10 participants who performed touch gestures. Our capture apparatus integrates optical touch sensing to obtain ground-truth contact through high-resolution frustrated total internal reflection. We compare our method with a baseline using bicubic upsampling as well as the ground truth from FTIR images. We separately evaluate our method’s performance in discriminating adjacent touches. CapContact successfully separated closely adjacent touch contacts in 494 of 570 cases (87%) compared to the baseline's 43 of 570 cases (8%). Importantly, we demonstrate that our method accurately performs even at half of the sensing resolution at twice the grid-line pitch across the same surface area, challenging the current industry-wide standard of a ∼4mm sensing pitch. We conclude this paper with implications for capacitive touch sensing in general and for touch-input accuracy in particular.
 
 ![CapContact illustration of super-resolution capacitive touchscreens](https://siplab.org/teasers/capcontact.jpg)
 
 
-# Disclaimer
+## Disclaimer
 
 The dataset and code in this repository is for research purposes only. If you plan to use this for commercial purposes to build super-resolution capacitive touchscreens, please [contact us](https://siplab.org/contact). If you are interested in a collaboration with us around this topic, please also [contact us](https://siplab.org/contact).
 
@@ -56,9 +93,7 @@ ANY OTHER PROGRAMS), EVEN IF THE AUTHOR HAS BEEN ADVISED OF THE POSSIBILITY OF
 SUCH DAMAGES.
 ```
 
-# License
-
-[![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
+## License
 
 This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa].
 
