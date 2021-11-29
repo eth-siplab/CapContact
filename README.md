@@ -32,8 +32,31 @@ contact = sample['ftir']
 
 ## Code
 
-Our trained models as well as the code to train and test models will be uploaded soon.
+To run CapContact, start by cloning the Git repository:
 
+```
+git clone https://github.com/eth-siplab/CapContact.git
+cd CapContact
+```
+
+Create a virtual Python environment (Python  3.8) and install the dependencies:
+
+```
+pip install -r requirements.txt
+```
+### Training
+Use ```train.py``` script to train a model from scratch:
+
+```
+python train.py --train_set <PATH TO CSV FILE WITH PATHS TO DATAFILES FOR TRAINING> --val_set <PATH TO CSV FILE WITH PATHS TO DATAFILES FOR VALIDATION> --save_ckpt_path <PATH FOR STORING MODEL CHECKPOINTS> 
+```
+
+### Inference
+In order to do inference with a trained model run:
+
+```
+python inference.py --load_ckpt_path <PATH TO FOLDER WITH SAVED MODEL CHECKPOINTS> --load_ckpt_epoch <EPOCH WITH LOWEST VALIDATION ERROR> --test_set <PATH TO CSV FILE WITH PATHS TO DATAFILES FOR INFERENCE> --out_path <PATH FOR STORING INFERENCE OUPUT> 
+```
 
 ## Publication reference
 
